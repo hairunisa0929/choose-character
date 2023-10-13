@@ -27,6 +27,13 @@
       "type": "Rock",
       "description": "As it digs through the ground, it absorbs many hard objects. This is what makes its body so solid.",
       "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/095.png"
+    },
+    {
+      "name": "Hypno",
+      "type": "Psychic",
+      "description": "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+      "id": 5
     }
   ]
 }
