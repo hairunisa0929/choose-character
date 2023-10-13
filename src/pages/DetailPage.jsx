@@ -8,9 +8,9 @@ const fetcher = (url) => axios.get(url).then((response) => response.data);
 function DetailPage() {
   const { id } = useParams();
 
-  const { data } = useSWR(`http://localhost:3000/characters/${id}`, fetcher);
+  const { data, isLoading } = useSWR(`http://localhost:3000/characters/${id}`, fetcher);
 
-  if (!data) return <BeatLoader color="#38BDF8" />;
+  if (isLoading) return <BeatLoader color="#38BDF8" />;
 
   return (
     <section>
