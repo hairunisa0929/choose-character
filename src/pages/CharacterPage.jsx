@@ -154,14 +154,16 @@ function CharacterPage() {
         {isLoading ? (
           <BeatLoader color="#38BDF8" />
         ) : (
-          data?.map(({ id, name, img }) => (
-            <Card
-              title={name}
-              image={img}
-              key={id}
-              onClick={() => onClickCard(id, name)}
-            />
-          ))
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {data?.map(({ id, name, img }) => (
+              <Card
+                title={name}
+                image={img}
+                key={id}
+                onClick={() => onClickCard(id, name)}
+              />
+            ))}
+          </div>
         )}
       </div>
     </section>
