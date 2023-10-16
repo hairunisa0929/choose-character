@@ -4,6 +4,10 @@
 
 @layer components {
     .btn-primary {
-        @apply rounded-lg bg-sky-400 p-2 text-white mt-2 w-fit
+        @apply rounded-lg bg-sky-400 p-2 text-white mt-2
+    }
+
+    .error {
+        @apply text-sm text-red-500
     }
 }

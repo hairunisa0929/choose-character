@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import Card from "../components/Card";
+import Button from "../components/Button";
+import useRegularHooks from "../hooks/useRegularHooks";
 
 // function CharacterPage() {
 //   const navigate = useNavigate();
@@ -102,7 +103,7 @@ import Card from "../components/Card";
 // }
 
 function CharacterPage() {
-  const navigate = useNavigate();
+  const { navigate } = useRegularHooks();
 
   const getCharacters = (url) =>
     axios.get(url).then((response) => response.data);
@@ -142,12 +143,9 @@ function CharacterPage() {
   return (
     <section>
       <div className="flex justify-center gap-4">
-        <button
-          className="rounded-lg bg-sky-400 p-2 text-white mt-2 self-center"
-          onClick={onClickPostData}
-        >
+        <Button isPrimary className="self-center w-fit" onClick={onClickPostData}>
           Post Data
-        </button>
+        </Button>
       </div>
 
       <div className="flex justify-center gap-4 mt-8">

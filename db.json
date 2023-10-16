@@ -34,6 +34,37 @@
       "description": "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
       "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
       "id": 5
+    },
+    {
+      "name": "Hypno",
+      "type": "Psychic",
+      "description": "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
+      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
+      "id": 6
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "customerName": "Jay",
+      "customerEmail": "jay@gmail.com",
+      "customerCity": "Jakarta",
+      "delivery": "regular",
+      "wrap": false,
+      "pokemonName": "Charmander",
+      "price": 37000,
+      "qty": 1
+    },
+    {
+      "customerName": "Lin Yi",
+      "customerEmail": "linyi@gmail.com",
+      "customerCity": "Jakarta",
+      "delivery": "sameday",
+      "wrap": true,
+      "pokemonName": "Charmander",
+      "price": 37000,
+      "qty": 1,
+      "id": 2
     }
   ]
 }

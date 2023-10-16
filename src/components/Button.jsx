@@ -5,7 +5,11 @@ function Button(props) {
   if (props.isPrimary) className.push("btn-primary");
 
   return (
-    <button className={className.join(" ")} onClick={props.onClick}>
+    <button
+      className={className.join(" ")}
+      onClick={props.onClick}
+      type={props.type}
+    >
       {props.children}
     </button>
   );

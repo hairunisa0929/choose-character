@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import Hero from "../assets/hero.png";
+import Button from "../components/Button";
+import useRegularHooks from "../hooks/useRegularHooks";
 
 function LandingPage() {
-  const navigate = useNavigate();
+  const {navigate} = useRegularHooks();
 
   const onClickBrowse = () => {
     navigate("/characters");
@@ -14,12 +15,9 @@ function LandingPage() {
       <h1 className="text-xl font-bold capitalize">
         Find your favorite pokemon
       </h1>
-      <button
-        className="rounded-lg bg-sky-400 p-2 text-white mt-2"
-        onClick={onClickBrowse}
-      >
+      <Button isPrimary onClick={onClickBrowse} className="w-fit">
         Browse Now
-      </button>
+      </Button>
     </section>
   );
 }
