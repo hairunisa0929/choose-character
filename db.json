@@ -34,13 +34,6 @@
       "description": "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
       "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
       "id": 5
-    },
-    {
-      "name": "Hypno",
-      "type": "Psychic",
-      "description": "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
-      "img": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
-      "id": 6
     }
   ],
   "bookings": [

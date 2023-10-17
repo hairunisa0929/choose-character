@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+// import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import Button from "../components/Button";
+import { CheckoutContext } from "../context/CheckoutContext";
 
 // function CheckoutPage() {
 //   // const [name, setName] = useState("");
@@ -179,9 +181,13 @@ import Button from "../components/Button";
 // }
 
 function CheckoutPage() {
+  const { dataCheckout } = useContext(CheckoutContext);
+  console.log(dataCheckout)
+
   const schema = yup.object().shape({
-    name: yup.string().required("Field Name is required"),
+    name: yup.number("must be a number").typeError("Field Name is required"),
     email: yup.string().email().required("Email is required"),
+    // bookingdate: yup.date().required("date is required"),
   });
 
   const {
@@ -205,7 +211,7 @@ function CheckoutPage() {
       price: 37000,
       qty: 1,
     };
-    
+
     axios
       .post("http://localhost:3000/bookings", payload)
       .then(() => {
@@ -232,6 +238,7 @@ function CheckoutPage() {
                 className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
                 {...register("name")}
                 id="name"
+                type="number"
               />
               <p className="error">{errors.name?.message}</p>
             </div>
@@ -246,6 +253,22 @@ function CheckoutPage() {
               />
               <p className="error">{errors.email?.message}</p>
             </div>
+
+            {/* <div className="flex flex-col">
+              <label htmlFor="bookingdate">Booking Date</label>
+              <input
+                type="date"
+                id="bookingdate"
+                className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
+                {...register("bookingdate")}
+              />
+              <DatePicker
+                id="bookingdate"
+                className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
+                {...register("bookingdate")}
+              />
+              <p className="error">{errors.bookingdate?.message}</p>
+            </div> */}
 
             <div>
               <label htmlFor="city">City</label>
@@ -299,12 +322,12 @@ function CheckoutPage() {
           <div className="flex flex-col">
             <div className="flex justify-between mt-4">
               <img
-                src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png"
+                src={dataCheckout.img}
                 alt="foto"
                 className="w-16"
               />
 
-              <h3 className="font-bold">Charmander</h3>
+              <h3 className="font-bold">{dataCheckout.name}</h3>
               <span>1</span>
               <span>Rp 37.000</span>
             </div>

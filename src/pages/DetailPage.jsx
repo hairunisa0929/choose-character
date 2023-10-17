@@ -1,15 +1,18 @@
+import { useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import Button from "../components/Button";
 import useRegularHooks from "../hooks/useRegularHooks";
+import { CheckoutContext } from "../context/CheckoutContext";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
 
 function DetailPage() {
   const { id } = useParams();
   const { navigate } = useRegularHooks();
+  const { setDataCheckout } = useContext(CheckoutContext);
 
   const { data, isLoading } = useSWR(
     `http://localhost:3000/characters/${id}`,
@@ -18,7 +21,10 @@ function DetailPage() {
 
   if (isLoading) return <BeatLoader color="#38BDF8" />;
 
-  const onClickBuyNow = () => navigate("/checkout");
+  const onClickBuyNow = () => {
+    setDataCheckout(data);
+    navigate("/checkout");
+  };
 
   return (
     <section>
@@ -50,7 +56,9 @@ function DetailPage() {
               +
             </button>
           </div>
-          <Button isPrimary onClick={onClickBuyNow} className="w-fit">Buy Now</Button>
+          <Button isPrimary onClick={onClickBuyNow} className="w-fit">
+            Buy Now
+          </Button>
         </div>
       </div>
     </section>
