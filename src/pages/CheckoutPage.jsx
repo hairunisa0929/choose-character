@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Button from "../components/Button";
 import { CheckoutContext } from "../context/CheckoutContext";
+import { toRupiah } from "../utils/formatter";
 
 // function CheckoutPage() {
 //   // const [name, setName] = useState("");
@@ -182,12 +183,12 @@ import { CheckoutContext } from "../context/CheckoutContext";
 // }
 
 function CheckoutPage() {
-  // const { dataCheckout } = useContext(CheckoutContext);
-  const { dataCheckout } = useSelector((state) => state.checkout);
+  const { dataCheckout } = useContext(CheckoutContext);
+  // const { dataCheckout } = useSelector((state) => state.checkout);
   console.log(dataCheckout);
 
   const schema = yup.object().shape({
-    name: yup.number("must be a number").typeError("Field Name is required"),
+    name: yup.string("Field Name is required"),
     email: yup.string().email().required("Email is required"),
     // bookingdate: yup.date().required("date is required"),
   });
@@ -209,9 +210,9 @@ function CheckoutPage() {
       customerCity: data.city,
       delivery: data.delivery,
       wrap: data.wrap,
-      pokemonName: "Charmander",
-      price: 37000,
-      qty: 1,
+      pokemonName: dataCheckout.name,
+      price: dataCheckout.price,
+      qty: dataCheckout.qty,
     };
 
     axios
@@ -240,7 +241,7 @@ function CheckoutPage() {
                 className="w-full rounded-lg border-[1px] border-gray-200 p-4 pe-12 text-sm focus:outline-sky-200"
                 {...register("name")}
                 id="name"
-                type="number"
+                // type="number"
               />
               <p className="error">{errors.name?.message}</p>
             </div>
@@ -326,8 +327,8 @@ function CheckoutPage() {
               <img src={dataCheckout.img} alt="foto" className="w-16" />
 
               <h3 className="font-bold">{dataCheckout.name}</h3>
-              <span>1</span>
-              <span>Rp 37.000</span>
+              <span>{dataCheckout.qty}</span>
+              <span>{toRupiah(dataCheckout.price)}</span>
             </div>
           </div>
 
@@ -335,7 +336,9 @@ function CheckoutPage() {
 
           <div className="flex justify-between mt-4">
             <span className="font-bold">Total</span>
-            <span className="font-bold">Rp 37.000</span>
+            <span className="font-bold">
+              {toRupiah(dataCheckout.qty * dataCheckout.price)}
+            </span>
           </div>
         </div>
       </div>
