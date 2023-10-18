@@ -6,18 +6,15 @@ import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import Button from "../components/Button";
 import useRegularHooks from "../hooks/useRegularHooks";
-import { CheckoutContext } from "../context/CheckoutContext";
 import { toRupiah } from "../utils/formatter";
-// import { checkoutBooking } from "../store/actions/checkoutAction";
-// import { checkoutBooking } from "../store/reducers/checkoutSlice";
+import { checkoutBooking } from "../store/actions/checkoutAction";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
 
 function DetailPage() {
   const { id } = useParams();
   const { navigate } = useRegularHooks();
-  const { setDataCheckout } = useContext(CheckoutContext);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
 
@@ -36,10 +33,11 @@ function DetailPage() {
   };
 
   const onClickBuyNow = () => {
-    setDataCheckout({
+    const payload = {
       ...data,
       qty,
-    });
+    };
+    dispatch(checkoutBooking(payload));
     navigate("/checkout");
   };
 
