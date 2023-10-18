@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import Button from "../components/Button";
 import useRegularHooks from "../hooks/useRegularHooks";
 import { CheckoutContext } from "../context/CheckoutContext";
+import { checkoutBooking } from "../store/actions/checkoutAction";
 
 const fetcher = (url) => axios.get(url).then((response) => response.data);
 
@@ -13,6 +15,7 @@ function DetailPage() {
   const { id } = useParams();
   const { navigate } = useRegularHooks();
   const { setDataCheckout } = useContext(CheckoutContext);
+  const dispatch = useDispatch();
 
   const { data, isLoading } = useSWR(
     `http://localhost:3000/characters/${id}`,
@@ -22,7 +25,8 @@ function DetailPage() {
   if (isLoading) return <BeatLoader color="#38BDF8" />;
 
   const onClickBuyNow = () => {
-    setDataCheckout(data);
+    // setDataCheckout(data);
+    dispatch(checkoutBooking(data));
     navigate("/checkout");
   };
 

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
+import axios from "axios";
 // import DatePicker from "react-datepicker";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import axios from "axios";
 import Button from "../components/Button";
 import { CheckoutContext } from "../context/CheckoutContext";
 
@@ -181,8 +182,9 @@ import { CheckoutContext } from "../context/CheckoutContext";
 // }
 
 function CheckoutPage() {
-  const { dataCheckout } = useContext(CheckoutContext);
-  console.log(dataCheckout)
+  // const { dataCheckout } = useContext(CheckoutContext);
+  const { dataCheckout } = useSelector((state) => state.checkout);
+  console.log(dataCheckout);
 
   const schema = yup.object().shape({
     name: yup.number("must be a number").typeError("Field Name is required"),
@@ -321,11 +323,7 @@ function CheckoutPage() {
           <hr />
           <div className="flex flex-col">
             <div className="flex justify-between mt-4">
-              <img
-                src={dataCheckout.img}
-                alt="foto"
-                className="w-16"
-              />
+              <img src={dataCheckout.img} alt="foto" className="w-16" />
 
               <h3 className="font-bold">{dataCheckout.name}</h3>
               <span>1</span>
