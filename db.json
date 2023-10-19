@@ -74,6 +74,17 @@
       "price": 120000,
       "qty": 4,
       "id": 3
+    },
+    {
+      "customerName": "ca",
+      "customerEmail": "ca@gmail.com",
+      "customerCity": "Jakarta",
+      "delivery": "regular",
+      "wrap": false,
+      "pokemonName": "Onix",
+      "price": 110000,
+      "qty": 1,
+      "id": 4
     }
   ]
 }
