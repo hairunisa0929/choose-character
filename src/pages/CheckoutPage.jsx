@@ -194,11 +194,12 @@ function CheckoutPage() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmitForm = async (data) => {
+  const onSubmitForm = (data) => {
     console.log(data);
 
     const payload = {
@@ -215,7 +216,8 @@ function CheckoutPage() {
     axios
       .post("http://localhost:3000/bookings", payload)
       .then(() => {
-        console.log("Successfully made a new booking!");
+        alert("Successfully made a new booking!");
+        reset();
       })
       .catch((error) => console.log(error));
   };
