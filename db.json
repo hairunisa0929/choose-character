@@ -75,5 +75,13 @@
       "qty": 4,
       "id": 3
     }
+  ],
+  "users": [
+    {
+      "email": "user1@mail.com",
+      "password": "$2a$10$/la4F91f3uA9Onpq2d60U.MJrmqnT7hfwVfT6Q93AZCkpIwiQXqBa",
+      "name": "User 1",
+      "id": 1
+    }
   ]
 }
