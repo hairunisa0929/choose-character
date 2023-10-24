@@ -1,10 +1,16 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import { setToken, setUser } from "../store/reducers/authSlice";
 
 function LoginPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const schema = yup.object().shape({
     email: yup.string().email().required("Email is required"),
     password: yup.string().min(5).max(32).required(),
@@ -23,8 +29,10 @@ function LoginPage() {
     axios
       .post("http://localhost:3000/login", data)
       .then((res) => {
-        console.log(res.data);
-        alert("Successfully login!");
+        const { accessToken, user } = res.data;
+        dispatch(setToken(accessToken));
+        dispatch(setUser(user));
+        navigate("/");
         reset();
       })
       .catch((error) => console.log(error));

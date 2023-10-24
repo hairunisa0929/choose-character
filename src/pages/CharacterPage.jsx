@@ -1,115 +1,28 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
 import { BeatLoader } from "react-spinners";
 import useSWR from "swr";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import useRegularHooks from "../hooks/useRegularHooks";
-
-// function CharacterPage() {
-//   const navigate = useNavigate();
-//   const [data, setData] = useState();
-//   const [loading, setLoading] = useState(false);
-
-//   const onClickCard = (id) => {
-//     navigate(`/characters/${id}`);
-//   };
-
-//   const onClickGetData = () => {
-//     fetch("http://localhost:3000/characters")
-//       .then((res) => res.json())
-//       .then((json) => {
-//         setData(json);
-//       })
-//       .catch((error) => console.log(error));
-//   };
-
-//   const onClickPostData = () => {
-//     const payload = {
-//       name: "Meowth",
-//       type: "Psychic",
-//       description:
-//         "When it locks eyes with an enemy, it will use a mix of psi moves, such as Hypnosis and Confusion.",
-//       img: "https://assets.pokemon.com/assets/cms2/img/pokedex/full/097.png",
-//     };
-
-//     // fetch("http://localhost:3000/characters", {
-//     //   method: "POST",
-//     //   body: JSON.stringify(payload),
-//     //   headers: {
-//     //     "Content-Type": "application/json",
-//     //   },
-//     // }).then(() => console.log("New pokemon added!"));
-
-//     axios
-//       .post("http://localhost:3000/characters", payload)
-//       .then(() => {
-//         console.log("New pokemon added!");
-//         fetchData();
-//       })
-//       .catch((error) => console.log(error));
-//   };
-
-//   const fetchData = async () => {
-//     setLoading(true);
-
-//     try {
-//       const response = await axios.get("http://localhost:3000/characters");
-//       setData(response.data);
-//       setLoading(false);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   return (
-//     <section>
-//       <div className="flex justify-center gap-4">
-//         <button
-//           className="rounded-lg bg-sky-400 p-2 text-white mt-2 self-center"
-//           onClick={onClickGetData}
-//         >
-//           Get Data
-//         </button>
-
-//         <button
-//           className="rounded-lg bg-sky-400 p-2 text-white mt-2 self-center"
-//           onClick={onClickPostData}
-//         >
-//           Post Data
-//         </button>
-//       </div>
-
-//       <div className="flex justify-center gap-4 mt-8">
-//         {loading ? (
-//           <BeatLoader color="#38BDF8" />
-//         ) : (
-//           data?.map(({ id, name, img }) => (
-//             <Card
-//               title={name}
-//               image={img}
-//               key={id}
-//               onClick={() => onClickCard(id)}
-//             />
-//           ))
-//         )}
-//       </div>
-//     </section>
-//   );
-// }
+import { useSelector } from "react-redux";
 
 function CharacterPage() {
   const { navigate } = useRegularHooks();
+  const token = useSelector((state) => state.auth.token);
 
   const getCharacters = (url) =>
-    axios.get(url).then((response) => response.data);
+    axios
+      .get(url, {
+        headers: {
+          Authorization: "Bearer " + token, //set token di header satu per satu
+        },
+      })
+      .then((response) => response.data);
+
+  // axios.get(url).then((response) => response.data);
 
   const { data, isLoading, error, mutate } = useSWR(
-    "http://localhost:3000/characters",
+    "http://localhost:3000/660/characters",
     getCharacters,
     {
       onSuccess: (data) => data.sort((a, b) => a.name.localeCompare(b.name)),
@@ -143,7 +56,11 @@ function CharacterPage() {
   return (
     <section>
       <div className="flex justify-center gap-4">
-        <Button isPrimary className="self-center w-fit" onClick={onClickPostData}>
+        <Button
+          isPrimary
+          className="self-center w-fit"
+          onClick={onClickPostData}
+        >
           Post Data
         </Button>
       </div>
